@@ -1,0 +1,25 @@
+.bar {
+	padding: 5;
+	background: #170a02;
+}
+.left {
+	margin-left: 8;
+	padding-left: 5;
+	padding-top: 2;
+	padding-bottom: 2;
+	color: #ebd9ce;
+}
+.workspace {
+	margin-right: 5;
+}
+
+.widget_right {
+}
+
+.rounded_block {
+	border-radius: 3;
+	background: #ebd9ce;
+}
+
+.time {
+}
