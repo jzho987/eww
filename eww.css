@@ -1,25 +1,51 @@
 .bar {
-	padding: 5;
-	background: #170a02;
+	padding-left: 15;
+	padding-right: 15;
+	background: #210a15;
 }
+
+.hover {
+	background: rgba(0,0,0,0);
+}
+
 .left {
-	margin-left: 8;
-	padding-left: 5;
+	padding-left: 8;
+	padding-right: 3;
 	padding-top: 2;
 	padding-bottom: 2;
-	color: #ebd9ce;
+	border-radius: 3;
+	background: #dbc7b2;
+	color: #261802;
 }
+
+.hover_center {
+	background: #261802;
+	border-radius: 3;
+	color: #dbc7b2;
+}
+
+.hover_right {
+	background: #261802;
+	margin-right: 100;
+	padding: 10;
+	border-radius: 3;
+	color: #dbc7b2;
+}
+
+.progress {
+}
+
 .workspace {
 	margin-right: 5;
 }
 
-.widget_right {
-}
-
 .rounded_block {
 	border-radius: 3;
-	background: #ebd9ce;
+	padding-left: 10;
+	padding-right: 10;
+	background: #dbc7b2;
 }
 
-.time {
+.right_pad {
+	margin-right: 10;
 }

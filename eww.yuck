@@ -1,11 +1,11 @@
 (defwindow ewwbar
-	:class "bar"
 	:monitor 0
-	:geometry (geometry :x "0%"
-	 :y "0px"
-	 :width "100%"
-	 :height "25px"
-	 :anchor "top center"
+	:geometry (geometry 
+		:x "0%"
+		:y "0px"
+		:width "100%"
+		:height "35px"
+		:anchor "top center"
 	)
 	:stacking "fg"
 	:exclusive true
@@ -14,34 +14,124 @@
 
 	(bar)
 )
-
 (defwidget bar []
 	(box :class "bar"
+		:space-evently false
 		(left)
+		(center)
 		(right)
 	)
 )
+
+(defwindow hover
+	:class "hover"
+	:monitor 0
+	:geometry (geometry 
+		:x "0%"
+		:y "5px"
+		:width "100%"
+		:height "35px"
+		:anchor "top center"
+	)
+	:stacking "fg"
+	:exclusive false
+	:focusable false
+	:namespace "example_name_space"
+
+	(hover)
+)
+(defwidget hover []
+	(box :class "hover"
+		:space-evently false
+		(hover_center)
+	)
+)
+
 (defwidget left [] (box :class "left"
 	:halign "start" 
 	:valign "center"
 	(literal :content workspace_literal)
 ))
-(defwidget right [] (box
+(defvar time_show false)
+(defwidget center [] (box :class "center"
+	:halign "center" 
+	:valign "center"
+	(eventbox
+		:onhover "eww update time_show=true"
+		:onhoverlost "eww update time_show=false"
+		:orientation "v"
+		:space-evently false
+		(box :class "rounded_block" time)
+	)
+))
+(defvar audio_show false)
+(defwidget right [] (box :class "right"
 	:halign "end" 
 	:valign "center"
-	(box :class "rounded_block" :width 100 time)
-	(box :class "rounded_block" battery "󰁹")
+	:space-evenly false
+	(eventbox
+		:onhover "eww update audio_show=true"
+		:onhoverlost "eww update audio_show=false"
+		:orientation "v"
+		:space-evently false
+		(box :class "right_pad rounded_block" "")
+	)
+	(box :class "rounded_block" battery "% 󰁹")
 ))
 
-(defpoll workspace_literal
+(defpoll date
 	:interval "1s"
-	:initial "init"
-	`./sway_workspaces.bash`
+	:initial "initial-value"
+  `date "+__%a___%b__%dth__%Y__"`
 )
+(defwidget hover_center [] (box
+	(box :halign "start" (revealer
+		:transition "crossfade"
+		:duration "100ms"
+		:reveal false
+		:halign "center"
+		(box :class "hover_center"
+			:width 300
+			:halign "center"
+			date
+		)
+	))
+	(box :halign "center" (revealer
+		:transition "crossfade"
+		:duration "100ms"
+		:reveal time_show
+		:halign "center"
+		(box :class "hover_center"
+			:width 300
+			:halign "center"
+			date
+		)
+	))
+	(box :halign "end" (revealer
+		:transition "crossfade"
+		:duration "100ms"
+		:reveal audio_show
+		(box :class "hover_right"
+			:halign "center"
+			:valign "center"
+			(progress :class "progress"
+				:value audio 
+				:orientation "v"
+				:flipped true
+			)
+		)
+	))
+))
+
 (defwidget workspace [icon]
 	(box :class "workspace"
 		icon
 	)
+)
+(defpoll workspace_literal
+	:interval "1s"
+	:initial "init"
+	`./sway_workspaces.bash`
 )
 
 (defpoll time
@@ -49,8 +139,11 @@
 	:initial "initial-value"
   `date +%H:%M:%S`
 )
-
-(deflisten battery 
+(defpoll audio
+	:interval "2s"
 	:initial "initial-value"
-  `tail -F /sys/class/power_supply/BAT0/capacity`
+  `./audio.bash`
+)
+(deflisten battery :initial "init"
+  `./battery.sh`
 )
