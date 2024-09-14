@@ -20,13 +20,14 @@
 
 .hover_center {
 	background: #261802;
+	padding: 10;
 	border-radius: 3;
 	color: #dbc7b2;
 }
 
 .hover_right {
 	background: #261802;
-	margin-right: 100;
+	margin-right: 87;
 	padding: 10;
 	border-radius: 3;
 	color: #dbc7b2;

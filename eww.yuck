@@ -76,14 +76,9 @@
 		:space-evently false
 		(box :class "right_pad rounded_block" "")
 	)
-	(box :class "rounded_block" battery "% 󰁹")
+	(box :class "rounded_block" battery)
 ))
 
-(defpoll date
-	:interval "1s"
-	:initial "initial-value"
-  `date "+__%a___%b__%dth__%Y__"`
-)
 (defwidget hover_center [] (box
 	(box :halign "start" (revealer
 		:transition "crossfade"
@@ -101,13 +96,17 @@
 		:duration "100ms"
 		:reveal time_show
 		:halign "center"
+		:valign "start"
 		(box :class "hover_center"
 			:width 300
 			:halign "center"
 			date
 		)
 	))
-	(box :halign "end" (revealer
+	(box 
+		:halign "end"
+		:valign "start"
+		(revealer
 		:transition "crossfade"
 		:duration "100ms"
 		:reveal audio_show
@@ -133,7 +132,11 @@
 	:initial "init"
 	`./sway_workspaces.bash`
 )
-
+(defpoll date
+	:interval "1s"
+	:initial "initial-value"
+  `date "+- %a %b %dth %Y -"`
+)
 (defpoll time
 	:interval "1s"
 	:initial "initial-value"
@@ -145,5 +148,5 @@
   `./audio.bash`
 )
 (deflisten battery :initial "init"
-  `./battery.sh`
+  `./battery.bash`
 )
