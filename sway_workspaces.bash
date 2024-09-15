@@ -18,9 +18,9 @@ format_yuck_component_literal () {
 	focused=$1
 	icon=""
 	if (( $focused == 1 )); then
-		icon=""
+		icon="󰣏"
 	else 
-		icon=""
+		icon="󱀝"
 	fi
 	echo "(workspace :icon '$icon')"
 }
