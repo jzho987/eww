@@ -30,10 +30,10 @@
 		:x "0%"
 		:y "5px"
 		:width "100%"
-		:height "35px"
+		:height "0px"
 		:anchor "top center"
 	)
-	:stacking "fg"
+	:stacking "overlay"
 	:exclusive false
 	:focusable false
 	:namespace "example_name_space"
@@ -76,7 +76,14 @@
 		:space-evently false
 		(box :class "right_pad rounded_block" "")
 	)
-	(box :class "rounded_block" battery)
+	(box :class "rounded_block right_pad" battery)
+	(systray :class "rounded_block"
+		:spacing 10
+		:orientation "h"
+		:space-evenly true
+		:icon-size 18
+		:prepend-new true
+	)
 ))
 
 (defwidget hover_center [] (box
@@ -127,9 +134,7 @@
 		icon
 	)
 )
-(defpoll workspace_literal
-	:interval "1s"
-	:initial "init"
+(deflisten workspace_literal :initial "init"
 	`./sway_workspaces.bash`
 )
 (defpoll date

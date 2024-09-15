@@ -34,5 +34,13 @@ print_yuck_lit () {
 	echo "(box $literal)"
 }
 
-echo $(print_yuck_lit)
+yuck_lit_c=""
+while true; do
+	yuck_lit=$(print_yuck_lit)
+	if [[ $yuck_lit_c != $yuck_lit ]]; then
+		yuck_lit_c=$yuck_lit
+		echo $yuck_lit
+	fi
+done
+
 

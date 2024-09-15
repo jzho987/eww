@@ -5,7 +5,7 @@
 }
 
 .hover {
-	background: rgba(0,0,0,0);
+	background: rgba(0,0,0,0.4);
 }
 
 .left {
@@ -45,6 +45,7 @@
 	padding-left: 10;
 	padding-right: 10;
 	background: #dbc7b2;
+	color: #261802;
 }
 
 .right_pad {
